@@ -1,8 +1,7 @@
 var wins = 0;
-var losses = 0;
 var numberOfGuesses = 6;
 
-var overwatchCharacters = [
+var overwatchHeros = [
     "ANA",
     "ASHE",
     "BAPTISTE",
@@ -36,6 +35,17 @@ var overwatchCharacters = [
     "ZENYATTA"
 ];
 
+var randomHero = overwatchHeros[Math.floor(Math.random()*overwatchHeros.length)];
+console.log(randomHero);
+
 // Pull random hero from array
 // display hero
+
 // when a key is pressed do something
+// add key pressed to list
+
+// lower number of guesses when pressing wrong key
+
+// add win when they guess the word correct
+
+// change image when word is revealed
