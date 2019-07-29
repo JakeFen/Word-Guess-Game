@@ -18,6 +18,10 @@ main, .image-div, .score-div {
     margin: 0 auto;
 }
 
+img {
+    width: 300px
+}
+
 .content-div {
     display: flex;
     height: 300px;
