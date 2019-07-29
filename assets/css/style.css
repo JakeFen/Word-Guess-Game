@@ -1,0 +1,35 @@
+body {
+    background: black;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+h1, H2, h3, .list-of-content, .image-div, .score-div {
+    color: white;
+    text-align: center;
+}
+
+main, .image-div, .score-div {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.content-div {
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    border: solid white 1px;
+    padding: 20px 0;
+}
+
+.list-of-content {
+    padding: 0;
+    border-left: solid white 1px;
+    height: 100%;
+    margin: auto;
+    list-style-type: none;
+}
