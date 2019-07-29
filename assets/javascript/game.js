@@ -35,10 +35,27 @@ var overwatchHeros = [
     "ZENYATTA"
 ];
 
-var randomHero = overwatchHeros[Math.floor(Math.random()*overwatchHeros.length)];
-console.log(randomHero);
+function Hangman() {
+    // a-z matches lowercase letters
+    // g modifier helps to do match gobally
+    // i case-insensitive
+    var randomHero = overwatchHeros[Math.floor(Math.random()*overwatchHeros.length)];
+    var randomHero = randomHero.replace(/a-z/gi, "_");
 
-// Pull random hero from array
+    // pulls the id hero-name from html and puts randomHero in place of heroName
+    var heroName = document.getElementById('hero-name');
+    heroName.textContent = randomHero;
+
+    console.log(randomHero); 
+}
+
+Hangman();
+
+function newGame() {
+// when enter is press restart game
+// make function that when enter is pressed run function of hangman
+}
+
 // display hero
 
 // when a key is pressed do something
