@@ -8,11 +8,8 @@ var guessesLeft = document.getElementById("guesses-left");
 var numberOfGuesses = 6;
 guessesLeft.textContent = numberOfGuesses;
 
-// gets id already-guessed takes the usersGuesses string and puts it in place of alreadyGuessed
-var alreadyGuessed = document.getElementById('already-guessed');
-var usersGuesses = ["_"];
-alreadyGuessed.textContent = usersGuesses;
-
+// holds keys pressed in this array
+var usersGuesses = [];
 var overwatchHeros = [
   "ANA",
   "ASHE",
@@ -35,7 +32,7 @@ var overwatchHeros = [
   "REINHARDT",
   "ROADHOG",
   "SIGMA",
-  "SOLDIER76",
+  "SOLDIER",
   "SOMBRA",
   "SYMMETRA",
   "TORBJORN",
@@ -53,22 +50,27 @@ function Hangman() {
   // i case-insensitive
   var randomHero =
     overwatchHeros[Math.floor(Math.random() * overwatchHeros.length)];
-  var randomHero = randomHero.replace(/a-z/gi, "_");
+    randomHero = randomHero.replace(/[A-Z]/g, "_ ");
 
   // pulls the id hero-name from html and puts randomHero in place of heroName
   var heroName = document.getElementById("hero-name");
   heroName.textContent = randomHero;
+
+  // Finding what key was pressed and printing it to screen
+  document.onkeyup = function(event) {
+    var usersGuess = event.key;
+    var alreadyGuessed = document.getElementById('already-guessed');
+    usersGuesses.push(usersGuess);
+    alreadyGuessed.textContent = usersGuesses;
+  }
+
+  
+    //when enter is press restart game
+    //make function that when enter is pressed run function of hangman
+
 }
 
 Hangman();
-
-function newGame() {
-  // when enter is press restart game
-  // make function that when enter is pressed run function of hangman
-}
-
-// when a key is pressed do something
-// add key pressed to list
 
 // lower number of guesses when pressing wrong key
 
