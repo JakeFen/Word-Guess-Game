@@ -5,11 +5,12 @@ wins.textContent = totalWins;
 
 // gets id guesses-left takes the numberOfGuesses count and puts it in place of guesses-left id
 var guessesLeft = document.getElementById("guesses-left");
-var numberOfGuesses = 6;
+var numberOfGuesses = 12;
 guessesLeft.textContent = numberOfGuesses;
 
-// holds keys pressed in this array
-var usersGuesses = [];
+var alreadyGuessed = document.getElementById("already-guessed");
+
+// arrays for content
 var overwatchHeros = [
   "ANA",
   "ASHE",
@@ -43,31 +44,61 @@ var overwatchHeros = [
   "ZARYA",
   "ZENYATTA"
 ];
+var rightLetter = [];
+var wrongLetter = [];
+var underScore = [];
 
 function Hangman() {
-  // a-z matches lowercase letters
-  // g modifier helps to do match gobally
-  // i case-insensitive
   var randomHero =
     overwatchHeros[Math.floor(Math.random() * overwatchHeros.length)];
-    randomHero = randomHero.replace(/[A-Z]/g, "_ ");
 
-  // pulls the id hero-name from html and puts randomHero in place of heroName
+  // adds underscore to UnderScore for ever letter thats in randomHero
+  for (var i = 0; i < randomHero.length; i++) {
+    underScore.push("_");
+  }
+
+  // pulls the id hero-name from html and puts underScore in place of heroName
   var heroName = document.getElementById("hero-name");
-  heroName.textContent = randomHero;
+  heroName.textContent = underScore;
 
   // Finding what key was pressed and printing it to screen
   document.onkeyup = function(event) {
-    var usersGuess = event.key;
-    var alreadyGuessed = document.getElementById('already-guessed');
-    usersGuesses.push(usersGuess);
-    alreadyGuessed.textContent = usersGuesses;
+    var usersGuess = event.key.toUpperCase();
+    if (randomHero.indexOf(usersGuess) > -1) {
+      // add to write letter array
+      rightLetter.push(usersGuess);
+      underScore[randomHero.indexOf(usersGuess)] = usersGuess;
+      heroName.textContent = underScore;
+      if (underScore.join("") === randomHero) {
+        youWon();
+      }
+    } else {
+      wrongLetter.push(usersGuess);
+      numberOfGuesses--;
+      guessesLeft.textContent = numberOfGuesses;
+      alreadyGuessed.textContent = wrongLetter;
+      if (numberOfGuesses === 0) {
+        alert("You have lost!");
+      }
+    }
+  };
+
+  function youWon() {
+    alert("You Won!");
+    totalWins++;
+    wins.textContent = totalWins;
   }
 
-  
-    //when enter is press restart game
-    //make function that when enter is pressed run function of hangman
+  // document.onkeyup = function(event) {
+  //   var usersGuess = event.key;
+  //   if (randomHero.indexOf(usersGuess) > -1) {
+  //     rightLetter.push(usersGuess);
+  //     console.log(randomHero);
+  //   }
+  // }
 
+  //when enter is press restart game
+  //make function that when enter is pressed run function of hangman
 }
 
 Hangman();
