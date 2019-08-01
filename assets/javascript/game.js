@@ -79,6 +79,8 @@ var letters = [
 function Hangman() {
   var randomHero =
     overwatchHeros[Math.floor(Math.random() * overwatchHeros.length)];
+    var randomHeroSplit = randomHero.split('');
+    console.log(randomHeroSplit);
   // adds underscore to UnderScore for ever letter thats in randomHero
   for (var i = 0; i < randomHero.length; i++) {
     underScore.push("_");
@@ -92,7 +94,7 @@ function Hangman() {
   document.onkeyup = function(event) {
     var usersGuess = event.key.toUpperCase();
     if (letters.includes(usersGuess)) {
-      if (randomHero.includes(usersGuess)) {
+      if (randomHeroSplit.includes(usersGuess)) {
         // add to rightletter array
         rightLetter.push(usersGuess);
         underScore[randomHero.indexOf(usersGuess)] = usersGuess;
