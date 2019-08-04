@@ -1,16 +1,18 @@
 // gets id wins takes the totalWins count and puts it in place of wins id
-var wins = document.getElementById("wins");
-var totalWins = 0;
-wins.textContent = totalWins;
 
 // gets id guesses-left takes the numberOfGuesses count and puts it in place of guesses-left id
-var guessesLeft = document.getElementById("guesses-left");
-var numberOfGuesses = 12;
+
+var totalWins = 0;
+
+// arrays for content
+function Hangman() {
+  var wins = document.getElementById("wins");
+wins.textContent = totalWins;
+
+  var guessesLeft = document.getElementById("guesses-left");
 guessesLeft.textContent = numberOfGuesses;
 
 var alreadyGuessed = document.getElementById("already-guessed");
-
-// arrays for content
 var overwatchHeros = [
   "ANA",
   "ASHE",
@@ -75,8 +77,8 @@ var letters = [
   "Y",
   "Z"
 ];
+var numberOfGuesses = 12;
 
-function Hangman() {
   var randomHero =
     overwatchHeros[Math.floor(Math.random() * overwatchHeros.length)];
     var randomHeroSplit = randomHero.split('');
@@ -93,13 +95,18 @@ function Hangman() {
   // Finding what key was pressed and printing it to screen
   document.onkeyup = function(event) {
     var usersGuess = event.key.toUpperCase();
+    let holder = [];
     if (letters.includes(usersGuess)) {
       if (randomHeroSplit.includes(usersGuess)) {
-        // add to rightletter array
-        rightLetter.push(usersGuess);
-        underScore[randomHero.indexOf(usersGuess)] = usersGuess;
-        heroName.textContent = underScore.join(" ");
-
+        for (let i = 0; i < randomHeroSplit.length; i++) {
+          if (randomHeroSplit[i] === usersGuess) {
+            holder.push(i);
+          }
+        }
+        for (let i = 0; i < holder.length; i++) {
+          underScore[holder[i]] = usersGuess
+          heroName.textContent = underScore.join(" ");
+        };
         if (underScore.join("") === randomHero) {
           youWon();
         }
@@ -113,17 +120,25 @@ function Hangman() {
         alreadyGuessed.textContent = wrongLetter;
         if (numberOfGuesses === 0) {
           alert("You have lost!");
-          reset();
+          Hangman();
+          wrongLetter.length = 0;
         }
       }
     }
   };
 
   function youWon() {
+    var enter = ["ENTER"];
     alert("You Won! Press the 'Enter' key to start a new game!");
     totalWins++;
+    document.onkeyup = function(event) {
     wins.textContent = totalWins;
+    var usersGuess = event.key.toUpperCase();
+    if (enter.includes(usersGuess)) {
+      Hangman();
+    }
   }
+}
 }
 
 Hangman();
@@ -132,4 +147,3 @@ Hangman();
 
 // need to figure out how to find all of the same letters in the array
 // and pop up on the screen
-
