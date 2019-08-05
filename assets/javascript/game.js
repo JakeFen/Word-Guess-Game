@@ -121,7 +121,6 @@ var numberOfGuesses = 12;
         if (numberOfGuesses === 0) {
           alert("You have lost!");
           Hangman();
-          wrongLetter.length = 0;
         }
       }
     }
